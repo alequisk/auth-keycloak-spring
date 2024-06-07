@@ -15,13 +15,14 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     public static final String ADMIN = "admin";
     public static final String USER = "user";
+    
     private final JwtConverter jwtConverter;
 
-    @Bean
+	@Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) ->
-                authz.requestMatchers(HttpMethod.GET, "/api/hello").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/admin/**").hasRole(ADMIN)
+                authz.requestMatchers(HttpMethod.GET, "/resource/echo/public").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/resource/echo/protected").hasRole(ADMIN)
                         .requestMatchers(HttpMethod.GET, "/api/user/**").hasRole(USER)
                         .requestMatchers(HttpMethod.GET, "/api/admin-and-user/**").hasAnyRole(ADMIN,USER)
                         .anyRequest().authenticated());
