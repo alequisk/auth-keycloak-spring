@@ -19,7 +19,7 @@ public class SecurityConfig {
     private final JwtConverter jwtConverter;
 
 	@Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) ->
                 authz.requestMatchers(HttpMethod.GET, "/resource/echo/public").permitAll()
                         .requestMatchers(HttpMethod.GET, "/resource/echo/protected").hasRole(ADMIN)
