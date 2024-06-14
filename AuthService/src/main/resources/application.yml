@@ -16,8 +16,7 @@ spring:
       mvc:
         routes:
           - id: resource-service
-#           uri: lb://resource-service
-            uri: http://localhost:8082
+            uri: lb://resource-service 
             predicates:
               - Path=/resource/**
             filters:
@@ -30,4 +29,10 @@ jwt:
       principal-attribute: principal_username
       
 server:
-  port: 8081
+  port: ${PORT:8080}
+
+eureka:
+  client:
+    register-with-eureka: false
+    serviceUrl:
+      defaultZone: ${EUREKA_URI:http://localhost:8761/eureka}
